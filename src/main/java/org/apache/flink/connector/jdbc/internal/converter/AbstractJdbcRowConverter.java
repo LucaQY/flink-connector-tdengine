@@ -121,7 +121,7 @@ public abstract class AbstractJdbcRowConverter implements JdbcRowConverter {
 
     /** Runtime converter to convert JDBC field to {@link RowData} type object. */
     @FunctionalInterface
-    interface JdbcDeserializationConverter extends Serializable {
+    protected interface JdbcDeserializationConverter extends Serializable {
         /**
          * Convert a jdbc field object of {@link ResultSet} to the internal data structure object.
          *
@@ -135,7 +135,7 @@ public abstract class AbstractJdbcRowConverter implements JdbcRowConverter {
      * PreparedStatement}.
      */
     @FunctionalInterface
-    interface JdbcSerializationConverter extends Serializable {
+    protected interface JdbcSerializationConverter extends Serializable {
         void serialize(RowData rowData, int index, FieldNamedPreparedStatement statement)
                 throws SQLException;
     }
