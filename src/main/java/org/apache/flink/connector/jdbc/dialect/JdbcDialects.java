@@ -6,6 +6,7 @@
 package org.apache.flink.connector.jdbc.dialect;
 
 import com.github.echisan.flink.connector.jdbc.dialect.TDengineDialect;
+import com.github.echisan.flink.connector.jdbc.dialect.IoTDBDialect;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -17,6 +18,7 @@ public final class JdbcDialects {
             new DerbyDialect(),
             new MySQLDialect(),
             new PostgresDialect(),
+            new IoTDBDialect(),
             new TDengineDialect()
     );
 

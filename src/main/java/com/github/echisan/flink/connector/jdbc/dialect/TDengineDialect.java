@@ -1,18 +1,19 @@
 package com.github.echisan.flink.connector.jdbc.dialect;
 
 import com.github.echisan.flink.connector.jdbc.internal.converter.TDengineRowConverter;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.flink.connector.jdbc.dialect.JdbcDialect;
 import org.apache.flink.connector.jdbc.internal.converter.JdbcRowConverter;
 import org.apache.flink.table.types.logical.RowType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
-@Slf4j
 public class TDengineDialect implements JdbcDialect {
+    private static final Logger LOG = LoggerFactory.getLogger(java.lang.invoke.MethodHandles.lookup().lookupClass());
 
     @Override
     public String dialectName() {
@@ -37,7 +38,7 @@ public class TDengineDialect implements JdbcDialect {
 
 
     public String getInsertIntoStatement(String tableName, String[] fieldNames) {
-        log.info("tableName:{}, fieldNames:{}", tableName, fieldNames);
+        LOG.info("tableName:{}, fieldNames:{}", tableName, fieldNames);
         return JdbcDialect.super.getInsertIntoStatement(tableName, fieldNames);
     }
 

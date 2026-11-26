@@ -36,6 +36,7 @@ import org.apache.flink.core.io.InputSplit;
 import org.apache.flink.core.io.InputSplitAssigner;
 import org.apache.flink.table.data.RowData;
 import org.apache.flink.util.Preconditions;
+import org.apache.iotdb.jdbc.IoTDBConnection;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -110,7 +111,13 @@ public class JdbcRowDataInputFormat extends RichInputFormat<RowData, InputSplit>
             if (autoCommit != null) {
                 dbConn.setAutoCommit(autoCommit);
             }
-            statement = dbConn.prepareStatement(queryTemplate, resultSetType, resultSetConcurrency);
+            if (dbConn instanceof IoTDBConnection) {
+                statement = dbConn.prepareStatement(queryTemplate);
+            } else {
+                statement =
+                        dbConn.prepareStatement(
+                                queryTemplate, resultSetType, resultSetConcurrency);
+            }
             if (fetchSize == Integer.MIN_VALUE || fetchSize > 0) {
                 statement.setFetchSize(fetchSize);
             }
